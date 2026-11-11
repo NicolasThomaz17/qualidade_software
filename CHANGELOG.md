@@ -1,5 +1,32 @@
 # Changelog
 
+## Preparação para v1.0.0-rc2 (não publicada)
+
+Esta seção registra mudanças em preparação no branch de trabalho. Não
+representa uma release, não altera a tag `v1.0.0-rc1` e não contém resultados
+de CI, SonarCloud ou carga ainda não executados.
+
+### Incluído
+- Pipeline GitHub Actions para `./mvnw -B clean verify` em PRs para `main`,
+  pushes em `main` e tags `v*`, com artefatos Surefire e JaCoCo.
+- Geração local do relatório JaCoCo durante `verify`.
+- Testes MVC isolados dos endpoints de estudantes e professores.
+- Verificação local nesta preparação: 12 testes passaram; JaCoCo mediu
+  50,30% de linhas e 25,00% de branches. O checkout estava modificado; estes
+  números não são evidência de CI ou de release.
+- Documentação de especificação, arquitetura, API, critérios e plano de
+  testes em `docs/`.
+- Índice de evidências e relatórios provisórios com itens externos
+  explicitamente pendentes.
+
+### Pendente antes da release
+- Merge por revisão por pares, execução verde na `main` e execução vinculada
+  ao commit candidato.
+- Configuração do projeto e token SonarCloud, Quality Gate aprovado e
+  evidência publicada.
+- Execução aprovada do teste de carga e registro de resultados medidos.
+- Verificação funcional das rotas que dependem do MongoDB.
+
 ## 2026-02-10 - Falha no `mvn clean install` por `MockMvc` ausente
 
 ### O que aconteceu

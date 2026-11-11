@@ -127,3 +127,16 @@ Este projeto demonstra:
 - Design de API RESTful
 - Integração com banco de dados NoSQL
 - Template frontend com Thymeleaf
+
+## Documentação de qualidade
+
+- [Contrato atual da API](docs/api.md)
+- [Especificação funcional e de qualidade](docs/fse.md)
+- [Diagramas de arquitetura](docs/arquitetura.md)
+- [Critérios de aceitação e release](docs/criterios.md)
+- [Plano e resultado dos testes](docs/testes/plano.md)
+- [Índice de evidências (provisório)](docs/evidencias/README.md)
+
+Para executar a aplicação, forneça a connection string de um MongoDB
+autorizado por `MONGODB_URI`. Não use credenciais versionadas nem interprete
+a existência de uma execução de testes MVC como validação do banco remoto.
