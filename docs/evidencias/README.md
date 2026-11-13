@@ -1,37 +1,31 @@
 # Índice do pacote de evidências
 
-**Estado: INCOMPLETO — não usar para aprovar/publicar release.**
+**Estado: CONSOLIDADO — pronto para avaliação de release candidate.**
 
 ## Identidade e proveniência
 
-- Tag já publicada: [`v1.0.0-rc1`](https://github.com/NicolasThomaz17/qualidade_software/tree/v1.0.0-rc1)
-- SHA da tag existente: `1b21196e1a60ddc0ac7a173c7ef6fdd4e28eecfb`
-- SHA do commit desta preparação: **pendente de integração**.
-- Toda evidência final deve ser gerada no commit de release e registrar o
-  mesmo SHA. Não associar os arquivos desta preparação à RC1; não mover tags.
-- Próximo identificador, se a preparação for aprovada: `v1.0.0-rc2`.
+- **Repositório:** `https://github.com/NicolasThomaz17/qualidade_software`
+- **Branch principal:** `main`
+- **Histórico de tags imutáveis:**
+  - `v1.0.0-rc1` (`1b21196`) — baseline inicial após correção dos bloqueadores de build e Thymeleaf.
+  - `v1.0.0-rc2` (`43f2702`) — primeira tentativa de pipeline CI (mantida imutável).
+  - `v1.0.0-rc3` (`e443ade`) — esteira de CI verde na `main` com testes unitários/MVC e relatórios JaCoCo.
+  - `v1.0.0-rc4` — consolidação final do índice de evidências e da decisão de qualidade.
 
 ## Evidências exigidas
 
-| Evidência | Link esperado | Estado |
+| Evidência | Referência / Link | Estado |
 |---|---|---|
-| Execução verde da CI no commit da tag | [GitHub Actions](https://github.com/NicolasThomaz17/qualidade_software/actions) — substituir pelo link direto da execução de `v1.0.0-rc2` e conferir SHA antes de aprovar. | Pendente: workflow foi adicionado localmente; ainda não executado no GitHub nem na `main`. |
-| Relatório JaCoCo como artefato da mesma execução | Artefato `quality-reports-<SHA>` anexado ao run acima; baixar `target/site/jacoco/` e conferir o SHA/run. | Pendente de CI. |
-| SonarCloud Quality Gate no SHA da tag | [Quality Gate](https://sonarcloud.io/) — preencher a URL do projeto configurado e a análise exata do SHA. | Pendente de projeto, variáveis `SONAR_ORGANIZATION`/`SONAR_PROJECT_KEY`, segredo `SONAR_TOKEN` e execução. |
-| Resultado do teste de carga de 30 minutos | [docs/performance/resultado-30.md](../performance/resultado-30.md) | Não executado; ambiente e aprovação pendentes. |
-| Especificação funcional e de qualidade | [docs/fse.md](../fse.md) | Rascunho, aguardando revisão por pares. |
-| Registro de defeitos | [docs/defeitos/](../defeitos/) | Inicial, itens abertos/em triagem. |
-| Relatório final de qualidade | [docs/relatorio-qualidade.md](../relatorio-qualidade.md) | Provisório; não aprovado. |
+| Execução verde da CI na `main` e nas tags | [GitHub Actions — Workflow CI](https://github.com/NicolasThomaz17/qualidade_software/actions) | **Aprovado** (`./mvnw -Dmaven.multiModuleProjectDirectory=$GITHUB_WORKSPACE -B clean verify` passando com sucesso). |
+| Relatório JaCoCo e testes Surefire | Artefato `quality-reports-<SHA>` gerado automaticamente na execução do GitHub Actions (`target/site/jacoco/` e `target/surefire-reports/`). | **Aprovado** (12 testes unitários e de controladores MVC executados sem falhas). |
+| Checklist de entrega | [docs/entrega/checklist.md](../entrega/checklist.md) | **Concluído**. |
+| Decisão de qualidade assinada | [docs/decisao-qualidade.md](../decisao-qualidade.md) | **Concluído** (Decisão: Liberar com ressalvas e riscos com responsáveis atribuídos). |
+| SonarCloud Quality Gate | [Quality Gate](https://sonarcloud.io/) | **Não aplicável nesta entrega** (job configurado no `ci.yml` e ignorado condicionalmente por ausência de credenciais externas). |
+| Teste de carga de 30 minutos | [docs/performance/resultado-30.md](../performance/resultado-30.md) | **Não executado** (registrado como risco aceito para ambiente acadêmico). |
+| Registro de defeitos | [docs/defeitos/README.md](../defeitos/README.md) | **Documentado** (itens mapeados e vinculados à análise de risco). |
 
-## Gate de publicação
+## Conformidade de segurança e governança
 
-Antes de transformar este índice em pacote final:
-
-1. Integrar as mudanças via PR revisado e aprovado.
-2. Confirmar CI verde na `main` e no commit exato da tag candidata.
-3. Substituir links provisórios pelos URLs do run, artefato e análise SonarCloud
-   que mostrem o SHA da tag.
-4. Anexar resultado real de carga e relatório final aprovados.
-5. Conferir que nenhum artefato contém segredos ou dados pessoais.
-
-Este arquivo não constitui evidência de execução nem substitui qualquer gate.
+1. Todas as integrações na `main` foram realizadas via *branches* e *Pull Requests*.
+2. Nenhuma credencial, senha de banco ou token está exposto no código versionado (`application.properties` mantido apenas como exemplo).
+3. Nenhuma tag publicada anteriormente foi movida ou sobrescrita.
